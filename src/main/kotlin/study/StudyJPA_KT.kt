@@ -14,18 +14,14 @@ fun main(){
     try {
         //비영속
         val member :Member = Member(1L, "홍길동")
-        //영속
-        println("=== BEFORE ===")
-        //1차 캐시에 저장.
         em.persist(member)
-        println("=== AFTER ===")
 
-        //1차 캐시에서 조회
-        val findMember = em.find(Member::class.java, 1L)
-        println(findMember)
+        //쓰기 지연 과정에 가진 쿼리들을 DB에 요청
+        //영속성 컨텍스트를 비우지 않음.
+        //영속성 컨텍스트 와 데이베이스의 동기화!
+        em.flush()
 
-        //커밋 시점에 db 쿼리 실행
-        //트랜잭션 커밋 시점에서 DB 요청을 보내기때문에 일종의 쓰기 지연식으로 사용가능하다.
+        println("==========================")
         tx.commit()
     } catch (e: Exception){
         tx.rollback()
