@@ -1,6 +1,8 @@
 package study
 
 import study.domain.Member
+import study.domain.RoleType
+import java.time.LocalDateTime
 import javax.persistence.EntityManager
 import javax.persistence.EntityManagerFactory
 import javax.persistence.Persistence
@@ -13,14 +15,9 @@ fun main(){
     tx.begin()
     try {
         //비영속
-        val member :Member = Member(1L, "홍길동")
+        val member :Member = Member(1L, "홍길동",20, RoleType.USER, LocalDateTime.now(), LocalDateTime.now(), "test", 1)
         em.persist(member)
-
-        //쓰기 지연 과정에 가진 쿼리들을 DB에 요청
-        //영속성 컨텍스트를 비우지 않음.
-        //영속성 컨텍스트 와 데이베이스의 동기화!
-        em.flush()
-
+        println("member id = ${member.id}")
         println("==========================")
         tx.commit()
     } catch (e: Exception){

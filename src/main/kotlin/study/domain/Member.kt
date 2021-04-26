@@ -1,12 +1,17 @@
 package study.domain
 
 import java.time.LocalDateTime
-import java.util.*
 import javax.persistence.*
 
 @Entity
+@SequenceGenerator(
+    name = "MEMBER_SEQ_GENERATOR",
+    sequenceName = "MEMBER_SEQ", //매핑할 시퀀스 명
+    initialValue = 1, allocationSize = 1
+)
 data class Member(
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     val id: Long,
 
     @Column(name = "name")
