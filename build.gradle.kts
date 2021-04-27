@@ -1,6 +1,8 @@
 plugins {
     kotlin("jvm") version "1.4.32"
-    id("org.jetbrains.kotlin.plugin.jpa") version "1.5.0-RC"
+    kotlin("plugin.jpa")      version "1.4.32"
+    kotlin("plugin.allopen")  version "1.4.32"
+    kotlin("plugin.noarg")    version "1.4.32"
 }
 
 group = "study"
@@ -14,4 +16,10 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.hibernate:hibernate-core:5.4.30.Final")
     implementation("com.h2database:h2:1.4.199")
+}
+
+allOpen {
+    annotation("javax.persistence.Entity")
+    annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.Embeddable")
 }

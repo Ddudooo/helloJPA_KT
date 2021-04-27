@@ -2,6 +2,7 @@ package study
 
 import study.domain.Member
 import study.domain.RoleType
+import study.domain.Team
 import java.time.LocalDateTime
 import javax.persistence.EntityManager
 import javax.persistence.EntityManagerFactory
@@ -14,11 +15,16 @@ fun main(){
     val tx = em.transaction
     tx.begin()
     try {
-        //비영속
-        val member :Member = Member(1L, "홍길동",20, RoleType.USER, LocalDateTime.now(), LocalDateTime.now(), "test", 1)
+        val team = Team("team")
+        em.persist(team)
+
+        val member = Member("name")
+        member.team = team
         em.persist(member)
-        println("member id = ${member.id}")
-        println("==========================")
+
+        val memberTeam : Team = member.team!!
+        println("MEMBER[${member.name}] - TEAM[${memberTeam.name}]")
+
         tx.commit()
     } catch (e: Exception){
         tx.rollback()

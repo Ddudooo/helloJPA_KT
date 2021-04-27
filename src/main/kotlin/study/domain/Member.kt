@@ -4,38 +4,24 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-@SequenceGenerator(
-    name = "MEMBER_SEQ_GENERATOR",
-    sequenceName = "MEMBER_SEQ", //매핑할 시퀀스 명
-    initialValue = 1, allocationSize = 1
-)
-data class Member(
+class Member{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    val id: Long,
+    @GeneratedValue
+    var id : Long? = null
 
-    @Column(name = "name")
-    var username: String,
+    var name : String
 
-    var age: Int,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEAM_ID")
+    var team : Team? = null
+//    var teamId : Long? = null
 
-    @Enumerated(EnumType.STRING)
-    var roleType: RoleType,
+    constructor(name : String) {
+        this.name = name
+    }
 
-   /* @Temporal(TemporalType.TIMESTAMP)
-    var createDate: Date,
-
-    @Temporal(TemporalType.TIMESTAMP)
-    var lastModifiedDate: Date,*/
-
-    var createDate : LocalDateTime,
-
-    var lastModifiedDate : LocalDateTime,
-
-    @Lob
-    var description: String,
-
-    @Transient
-    var temp : Int
-
-    )
+    constructor(name : String, team : Team){
+        this.name = name
+        this.team = team
+    }
+}
