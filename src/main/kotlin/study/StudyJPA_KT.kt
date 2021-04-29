@@ -22,8 +22,16 @@ fun main(){
         member.team = team
         em.persist(member)
 
-        val memberTeam : Team = member.team!!
-        println("MEMBER[${member.name}] - TEAM[${memberTeam.name}]")
+        team.addMember(member)
+
+        em.flush()
+        em.clear()
+
+        val findTeam = em.find(Team::class.java, team.id)
+        val members = findTeam.members
+        for(findMember in members){
+            println("FIND MEMBER ${findMember.id} ${findMember.name}")
+        }
 
         tx.commit()
     } catch (e: Exception){

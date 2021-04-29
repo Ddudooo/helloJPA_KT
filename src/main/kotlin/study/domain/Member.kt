@@ -1,6 +1,5 @@
 package study.domain
 
-import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -24,4 +23,12 @@ class Member{
         this.name = name
         this.team = team
     }
+
+    /*
+    연관관계 편의 메소드
+    fun changeTeam(team : Team){
+        this.team = team
+        team.addMember(this)
+    }
+    */
 }
