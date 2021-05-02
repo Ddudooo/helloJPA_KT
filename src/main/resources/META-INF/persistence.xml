@@ -6,7 +6,7 @@
 		<!--  빌드 환경에 따라 자동으로 인식하지 못하여 추가  -->
 		<class>study.domain.Member</class>
 		<class>study.domain.Team</class>
-		<class>study.domain.Locker</class>
+<!--		<class>study.domain.Locker</class>-->
 		<class>study.domain.Product</class>
 		<class>study.domain.Order</class>
 		<class>study.domain.Item</class>

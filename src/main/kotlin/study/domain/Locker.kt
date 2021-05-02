@@ -1,3 +1,4 @@
+/*
 package study.domain
 
 import javax.persistence.Entity
@@ -19,4 +20,4 @@ class Locker {
     constructor(name : String){
         this.name = name
     }
-}
+}*/
