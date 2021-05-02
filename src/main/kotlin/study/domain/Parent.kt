@@ -10,7 +10,7 @@ class Parent : BaseEntity {
 
     var name : String
 
-    @OneToMany(mappedBy = "parent", cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "parent", orphanRemoval = true)
     var children : MutableList<Child> = mutableListOf()
 
     constructor(name: String){

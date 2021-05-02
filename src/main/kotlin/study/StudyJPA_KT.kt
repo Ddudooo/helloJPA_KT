@@ -20,6 +20,14 @@ fun main(){
         parent.addChild(child1)
         parent.addChild(child2)
         em.persist(parent)
+        em.persist(child1)
+        em.persist(child2)
+
+        em.flush()
+        em.clear()
+
+        val findParent = em.find(Parent::class.java, parent.id)
+        em.remove(findParent)
 
         tx.commit()
     } catch (e: Exception){
