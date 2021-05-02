@@ -3,7 +3,7 @@ package study.domain
 import javax.persistence.*
 
 @Entity
-class Member{
+class Member : BaseEntity{
     @Id
     @GeneratedValue
     var id : Long? = null
