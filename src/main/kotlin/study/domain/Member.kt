@@ -15,6 +15,10 @@ class Member{
     var team : Team? = null
 //    var teamId : Long? = null
 
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    var locker : Locker? = null
+
     constructor(name : String) {
         this.name = name
     }
