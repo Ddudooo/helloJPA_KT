@@ -13,6 +13,9 @@
 		<class>study.domain.Movie</class>
 		<class>study.domain.Album</class>
 		<class>study.domain.Book</class>
+		<!--  영속성 전의 테스트용  -->
+		<class>study.domain.Parent</class>
+		<class>study.domain.Child</class>
 		<properties>
 			<!--  필수 속성  -->
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
