@@ -13,6 +13,12 @@ class Member : BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     var team : Team? = null
+
+    @Embedded
+    var workPeriod : Period
+
+    @Embedded
+    var homeAdress : Address
 //    var teamId : Long? = null
 
     /*
@@ -21,13 +27,17 @@ class Member : BaseEntity{
     var locker : Locker? = null
     */
 
-    constructor(name : String) {
+    constructor(name: String, workPeriod: Period, homeAdress: Address) {
         this.name = name
+        this.workPeriod = workPeriod
+        this.homeAdress = homeAdress
     }
 
-    constructor(name : String, team : Team){
+    constructor(name: String, team: Team, workPeriod: Period, homeAdress: Address){
         this.name = name
         this.team = team
+        this.workPeriod = workPeriod
+        this.homeAdress = homeAdress
     }
 
     /*
