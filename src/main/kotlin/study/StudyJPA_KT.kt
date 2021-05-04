@@ -21,7 +21,9 @@ fun main(){
 
         em.persist(member1)
 
-        val member2 : Member = Member("member2", address)
+        val address2: Address = address.copy()
+
+        val member2 : Member = Member("member2", address2)
 
         em.persist(member2)
 
