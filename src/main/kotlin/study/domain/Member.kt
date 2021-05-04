@@ -18,7 +18,15 @@ class Member : BaseEntity{
     var workPeriod : Period
 
     @Embedded
-    var homeAdress : Address
+    var homeAddress : Address
+
+    @Embedded
+    @AttributeOverrides(
+        AttributeOverride(name="city", column = Column(name="work_city")),
+        AttributeOverride(name = "street", column = Column(name="work_street")),
+        AttributeOverride(name = "zipcode", column = Column(name="work_zipcode"))
+    )
+    var workAddress : Address
 //    var teamId : Long? = null
 
     /*
@@ -27,17 +35,19 @@ class Member : BaseEntity{
     var locker : Locker? = null
     */
 
-    constructor(name: String, workPeriod: Period, homeAdress: Address) {
+    constructor(name: String, workPeriod: Period, homeAddress: Address, workAddress: Address) {
         this.name = name
         this.workPeriod = workPeriod
-        this.homeAdress = homeAdress
+        this.homeAddress = homeAddress
+        this.workAddress = workAddress
     }
 
-    constructor(name: String, team: Team, workPeriod: Period, homeAdress: Address){
+    constructor(name: String, team: Team, workPeriod: Period, homeAddress: Address, workAddress: Address){
         this.name = name
         this.team = team
         this.workPeriod = workPeriod
-        this.homeAdress = homeAdress
+        this.homeAddress = homeAddress
+        this.workAddress = workAddress
     }
 
     /*
