@@ -13,21 +13,19 @@ fun main(){
     val tx = em.transaction
     tx.begin()
     try {
-        val child1 = Child("child1")
-        val child2 = Child("child2")
+        val address: Address = Address("city","street", "100-000")
 
-        val parent = Parent("parent")
-        parent.addChild(child1)
-        parent.addChild(child2)
-        em.persist(parent)
-        em.persist(child1)
-        em.persist(child2)
+        val period : Period = Period(LocalDateTime.now(), LocalDateTime.now())
 
-        em.flush()
-        em.clear()
+        val member1 : Member = Member("member1", address)
 
-        val findParent = em.find(Parent::class.java, parent.id)
-        em.remove(findParent)
+        em.persist(member1)
+
+        val member2 : Member = Member("member2", address)
+
+        em.persist(member2)
+
+        member1.homeAddress.city = "newCity"
 
         tx.commit()
     } catch (e: Exception){
