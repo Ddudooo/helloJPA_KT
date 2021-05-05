@@ -13,21 +13,14 @@ fun main(){
     val tx = em.transaction
     tx.begin()
     try {
-        val address: Address = Address("city","street", "100-000")
+        val resultList = em.createQuery(
+            "select m From Member m where m.name like '%kim%'",
+            Member::class.java
+        ).resultList
 
-        val period : Period = Period(LocalDateTime.now(), LocalDateTime.now())
-
-        val member1 : Member = Member("member1", address)
-
-        em.persist(member1)
-
-        val address2: Address = address.copy()
-
-        val member2 : Member = Member("member2", address2)
-
-        em.persist(member2)
-
-        member1.homeAddress.city = "newCity"
+        for(findMember:Member in resultList){
+            println("member $findMember.name")
+        }
 
         tx.commit()
     } catch (e: Exception){
