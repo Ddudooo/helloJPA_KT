@@ -13,8 +13,15 @@ fun main(){
     val tx = em.transaction
     tx.begin()
     try {
+        val homeAddress:Address = Address("city","street", "zipcode")
+        val newMember : Member = Member("name", homeAddress)
+        em.persist(newMember)
+
+        em.flush()
+        em.clear()
+
         val resultList = em.createQuery(
-            "select m From Member m where m.name like '%kim%'",
+            "select m From Member m",
             Member::class.java
         ).resultList
 
