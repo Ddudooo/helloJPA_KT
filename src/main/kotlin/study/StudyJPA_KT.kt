@@ -13,22 +13,24 @@ fun main(){
     val tx = em.transaction
     tx.begin()
     try {
-        for(i in 1..100) {
-            val homeAddress: Address = Address("city", "street", "zipcode")
-            val newMember: Member = Member("name${i}", homeAddress)
-            newMember.age = i
-            em.persist(newMember)
-        }
+        val newTeam :Team = Team("newTeam")
+        em.persist(newTeam)
+
+        val homeAddress: Address = Address("city", "street", "zipcode")
+        val newMember: Member = Member("name", homeAddress)
+        newMember.age = 10
+        em.persist(newMember)
+
+        newTeam.addMember(newMember)
 
         em.flush()
         em.clear()
 
+        val query = "select m From Member m inner join m.team t"
         val resultList = em.createQuery(
-            "select m From Member m order by m.age desc",
+            query,
             Member::class.java
         )
-            .setFirstResult(1)
-            .setMaxResults(10)
             .resultList
 
         println("result size = ${resultList.size}")
