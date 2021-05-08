@@ -17,7 +17,7 @@ fun main(){
         em.persist(newTeam)
 
         val homeAddress: Address = Address("city", "street", "zipcode")
-        val newMember: Member = Member("name", homeAddress)
+        val newMember: Member = Member("newTeam", homeAddress)
         newMember.age = 10
         em.persist(newMember)
 
@@ -26,7 +26,7 @@ fun main(){
         em.flush()
         em.clear()
 
-        val query = "select m From Member m inner join m.team t"
+        val query = "select m From Member m, Team t where m.name = t.name"
         val resultList = em.createQuery(
             query,
             Member::class.java
