@@ -10,6 +10,8 @@ class Member : BaseEntity{
 
     var name : String
 
+    var age : Int = 0
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     var team : Team? = null
