@@ -26,11 +26,13 @@ fun main(){
         em.flush()
         em.clear()
 
-        val query = "select m From Member m, Team t where m.name = t.name"
+        val query = "select m From Member m " +
+                "where m.memberType = :memberType"
         val resultList = em.createQuery(
             query,
             Member::class.java
         )
+            .setParameter("memberType", RoleType.USER)
             .resultList
 
         println("result size = ${resultList.size}")

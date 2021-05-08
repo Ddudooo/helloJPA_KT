@@ -12,6 +12,9 @@ class Member : BaseEntity{
 
     var age : Int = 0
 
+    @Enumerated(EnumType.STRING)
+    var memberType: RoleType = RoleType.USER
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     var team : Team? = null
