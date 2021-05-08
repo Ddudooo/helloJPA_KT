@@ -26,18 +26,19 @@ fun main(){
         em.flush()
         em.clear()
 
-        val query = "select m From Member m " +
-                "where m.memberType = :memberType"
+        val query = "select " +
+                "case when m.age <= 10 then '학생' " +
+                "when m.age >= 60 then '경로' " +
+                "else '일반' end "+
+                "from Member m "
         val resultList = em.createQuery(
-            query,
-            Member::class.java
+            query, String::class.java
         )
-            .setParameter("memberType", RoleType.USER)
             .resultList
 
         println("result size = ${resultList.size}")
-        for(findMember:Member in resultList){
-            println("member ${findMember.name}")
+        for(find:String in resultList){
+            println("find value =  $find")
         }
 
         tx.commit()
