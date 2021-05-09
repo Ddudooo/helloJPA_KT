@@ -16,29 +16,30 @@ fun main(){
         val newTeam :Team = Team("newTeam")
         em.persist(newTeam)
 
-        val homeAddress: Address = Address("city", "street", "zipcode")
-        val newMember: Member = Member("newTeam", homeAddress)
-        newMember.age = 10
-        em.persist(newMember)
-
-        newTeam.addMember(newMember)
+        for(i in 1..10) {
+            val homeAddress: Address = Address("city", "street", "zipcode")
+            val newMember: Member = Member("member$i", homeAddress)
+            newMember.age = 10+i
+            em.persist(newMember)
+            newTeam.addMember(newMember)
+        }
 
         em.flush()
         em.clear()
 
-        val query = "select " +
-                "case when m.age <= 10 then '학생' " +
-                "when m.age >= 60 then '경로' " +
-                "else '일반' end "+
-                "from Member m "
+        val query = "select distinct t from Team t join fetch t.members "
         val resultList = em.createQuery(
-            query, String::class.java
+            query, Team::class.java
         )
             .resultList
 
         println("result size = ${resultList.size}")
-        for(find:String in resultList){
-            println("find value =  $find")
+        for(find:Team in resultList){
+            println("find value =  ${find.name}, ${find.members.size}")
+            val members = find.members
+            for(member :Member in members){
+                println("team member = ${member.name}")
+            }
         }
 
         tx.commit()
